@@ -1,0 +1,4 @@
+<form action="" method="post">{% csrf_token %}
+    <p>Czy na pewno chcesz usunąć użytkownika {{ object.first_name }} {{ object.last_name }}?</p>
+    <input type="submit" value="Usuń" /><input type="button" value="Anuluj" onclick="window.history.go(-1);" />
+</form>

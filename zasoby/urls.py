@@ -14,10 +14,18 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url
+from django.conf import settings
 from django.contrib import admin
-from store.views import StoreListView
+from django.conf.urls.static import static
+from store.views import StoreListView, CreateProduct, ListOwners, EditOwner, CreateOwner, DeleteOwner, DetailProductView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'store/', StoreListView.as_view()),
-]
+    url(r'store/$', StoreListView.as_view(), name = 'store-list',),
+    url(r'store/new$', CreateProduct.as_view(), name = 'add-product',),
+    url(r'store/list-owner$', ListOwners.as_view(), name = 'list-owner',),
+    url(r'store/add-owner$', CreateOwner.as_view(), name = 'add-owner',),
+    url(r'store/edit(?P<pk>\d+)/$', EditOwner.as_view(), name = 'edit-owner',),
+    url(r'store/delete(?P<pk>\d+)/$', DeleteOwner.as_view(), name = 'delete-owner',),
+    url(r'^store/product-edit(?P<pk>[-\w]+)/$', DetailProductView.as_view(), name='product-detail'),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

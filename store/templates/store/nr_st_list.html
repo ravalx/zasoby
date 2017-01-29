@@ -1,7 +1,20 @@
 {% extends "base.html"  %}
+{% load static %}
 {% block 'content' %}
 <h1>
-Witaj swiecie
+Witaj świecie
 </h1>
+<table class="table">
+<tr><td>Nr. ST</td><td>Nazwa</td><td>Odpowidzialny materiałowo</td></tr>
+	{% for store in object_list %}
+	<tr><td><a href="{% url "product-detail" pk=store.id %}">{{ store.nr_product }}</a></td> <td>{{ store.name_product }}</td><td> {{ store.owner }}
+	{% if store.photo %}  
+	<a href="{%  get_media_prefix %}{{ store.photo }}">Img</a>
+	{% endif%}
+	
+	</td></tr>
+	
+	{% endfor %}
+</table>
 {% endblock %}
 

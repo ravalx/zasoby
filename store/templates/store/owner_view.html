@@ -1,0 +1,12 @@
+{% extends "base.html"  %}
+{% block 'content' %}
+
+<ul>
+	{% for store in object_list %}
+	<li> {{ store.pk }} {{ store.first_name }} {{ store.last_name }} {{ store.nick_name }} 
+			(<a href="{% url "edit-owner" pk=store.id %}">Edytuj</a>) (<a href="{% url "delete-owner" pk=store.id %}">delete</a>)
+	</li>
+	{% endfor %}
+</ul>
+
+{% endblock %}
